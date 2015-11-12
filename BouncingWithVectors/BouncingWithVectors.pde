@@ -1,5 +1,6 @@
 //declare variables
 float x, y, velX, velY, diam;
+PVector loc,vel; //replaces x, y, velX, and velY
 
 void setup() {
   //set size of canvas
@@ -11,6 +12,8 @@ void setup() {
   diam = 80;
   velX = random(-5, 5);
   velY = random(-5, 5);
+  loc = new PVector(width/2, height/2);
+  vel = new PVector(random(-5,5), random(-5,5));
 }
 
 void draw() {
@@ -21,17 +24,19 @@ void draw() {
   ellipse(x, y, diam, diam);
 
   //add velocity to position
-  x += velX;
-  y += velY;
+  x += vel.x;
+  y += vel.y;
 
   //bounce ball if it hits walls
   if (x + diam/2 >= width) {
-    velX = -abs(velX);    //if the ball hits the right wall, assign x velocity the negative version of itself
+    vel.x = -abs(vel.x);    //if the ball hits the right wall, assign x velocity the negative version of itself
   } else if (x - diam/2 <= 0) {
-    velX = abs(velX);     //if the ball hits the left wall, assign x velocity the positive version of itself
+    vel.x = abs(vel.x);     //if the ball hits the left wall, assign x velocity the positive version of itself
   }
   if (y + diam/2 >= height) {
-    velY = -abs(velY);
+    vel.y = -abs(vel.y);
   } else if (y - diam/2 <= 0) {
-    velY = abs(velY);
+    vel.y = abs(vel.y);
   }
+  
+}
